@@ -1,0 +1,90 @@
+#phones{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.cardStyle{
+    background-color: #030268;
+    color: #ffffff;
+    border: 2px solid #dc143c;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+}
+
+.cardStyle2{
+    background-color: #c5c5a3;
+    color: #ffffff;
+    border: 2px solid #dc143c;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+}
+
+button{
+    background-color: transparent;
+    border: 1px solid #dc143c;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin: 10px;
+}
+
+.searchGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:20px;
+}
+
+#searchInput{
+    padding: 7px 10px;
+    border: 1px solid #dc143c;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    width: 600px;
+}
+
+#searchBtn{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: transparent;
+    font-size: 20px;
+    color: #dc143c;
+}
+
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #dc143c;
+    font-size: 20px;
+}
+
+
+
+
+/* Media queries */
+
+@media(max-width:991px){
+    #meals{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:767px){
+    #meals{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+
+@media(max-width:575px){
+    #meals{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+}
