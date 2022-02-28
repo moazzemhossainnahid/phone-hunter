@@ -60,20 +60,21 @@ const displayPhone = (phones) => {
         console.log(phone);
         const div = document.createElement('div');
         div.innerHTML = `
-        <div onclick="loadData('${phone.phone_name}')" class="card m-3" style="width: 18rem;">
+        <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
 
             <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
 
             <div class="card-body">
                 <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
                 <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
-                <span class="card-detail d-block"> <span class="font-weight-bold">Slug :</span> </br> ${phone.slug}</span> </br>
-                <a href="#" class="btn btn-outline-primary">Explore More</a>
+                <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
             </div>
 
         </div>
 
         `;
+
+        // <span class="card-detail d-block"> <span class="font-weight-bold">Slug :</span> </br> ${phone.slug}</span> </br>
 
         // Get Append Parent Node
         phoneContainer.appendChild(div);
@@ -82,7 +83,37 @@ const displayPhone = (phones) => {
 
 
 // Get Load Single Phone Information
-
 const loadData = (data) => {
-    const url = `https://openapi.programming-hero.com/api/phones?`
-}
+
+    // Get Single phone Link
+    const url = `https://openapi.programming-hero.com/api/phone/${data}`
+    console.log(url);
+
+    // Get Single phone Link Fetch
+    fetch(url)
+        .then(res => res.json())
+        .then(phone => displayData(phone.data));
+};
+
+// Get Display Single Phone Information
+const displayData = (phone) => {
+    console.log(phone);
+
+    // Get Details conatiner
+    const DetailsContainer = document.getElementById('data');
+    DetailsContainer.innerHTML = `
+    
+        <div class="card mb-3">
+
+            <img class="card-img-top w-25 d-flex mx-auto my-3" src="${phone.image}" alt="Card image cap">
+
+            <div class="card-body">
+                <h5 class="card-title">${phone.name}</h5>
+                <p class="card-text"><span class="font-weight-bold">Brand name :</span> ${phone.brand}</p>
+                <p class="card-text"><small class="text-muted">${phone.releaseDate}</small></p>
+            </div>
+
+        </div>
+    
+    `;
+};
