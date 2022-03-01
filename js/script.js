@@ -1,4 +1,4 @@
-// The Phone Dadu
+// The Phone Baba
 
 // API Link
 // https://openapi.programming-hero.com/api/phones?
@@ -13,40 +13,6 @@ const searchPhone = () => {
 
     // Get Clear Input
     searchFld.value = '';
-
-    // Get Error Text
-    const error1 = document.getElementById('error1');
-    const error2 = document.getElementById('error2');
-
-
-    // Get Handle Error
-    if(searchFld.value === ''){
-        error1.style.display = 'none';
-        error2.style.display = 'block';
-    }else if(searchFld.value <= 0){
-        error1.style.display = 'none';
-        error2.style.display = 'block';
-    }else if(searchFld.value >= 0){
-        error1.style.display = 'none';
-        error2.style.display = 'block';
-    }else if(phones.data === undefined){
-        error1.style.display = 'block';
-        error2.style.display = 'none';
-    }else if(phones.data === null){
-        error1.style.display = 'block';
-        error2.style.display = 'none';
-    }else{
-        // Get Load Phones Data
-        fetch('https://openapi.programming-hero.com/api/phones?')
-        .then(res => res.json())
-        .then(phones => displayPhone(phones.data))
-
-        error1.style.display = 'none';
-        error2.style.display = 'none';
-    };
-
-
-
 
     // Get Load Phones Data
     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchTxt}`)
@@ -66,7 +32,16 @@ const displayPhone = (phones) => {
     // Get Clear old Search History
     phoneContainer.textContent = '';
 
+    // Get Error Handling
+    const error = document.getElementById('error');
 
+    if(phones.length === 0){
+        error.style.display = 'block';
+    }else{
+        error.style.display = 'none';
+    };
+
+    // Get Slice Result
     const phone20 = phones.slice(0,20);
     const phoneAll = phones.slice(20,200);
 
