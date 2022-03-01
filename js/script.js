@@ -41,6 +41,12 @@ const displayPhone = (phones) => {
         error.style.display = 'none';
     };
 
+    // if(phones.length === 0){
+    //     swal("Oppss, No Data Found...!", "Please Enter a Valid Phone Name.", "error");
+    // }else{
+    //     swal = 'none';
+    // };
+
     // Get Slice Result
     const phone20 = phones.slice(0,20);
     const phoneAll = phones.slice(20,200);
@@ -80,6 +86,10 @@ const displayPhone = (phones) => {
     });
 
     document.getElementById('showMore').addEventListener('click', function(){
+
+        
+    // Get Clear old Search History
+        phoneContainer.textContent = '';
 
     // Get Loop in Array
     phoneAll.forEach(phone => {
