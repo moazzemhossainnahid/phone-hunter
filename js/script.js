@@ -20,19 +20,25 @@ const searchPhone = () => {
     const error2 = document.getElementById('error2');
 
 
-    // // Get Handle Error
-    // if(searchFld.value === ''){
-    //     error2.style.display = 'block';
-    //     error1.style.display = 'none';
-    // }else{
-    //     // Get Load Phones Data
-    //     fetch('https://openapi.programming-hero.com/api/phones?')
-    //     .then(res => res.json())
-    //     .then(phones => displayPhone(phones.data))
+    // Get Handle Error
+    if(searchFld.value === ''){
+        error1.style.display = 'block';
+        error2.style.display = 'none';
+    }else if(searchFld.value <=0){
+        error2.style.display = 'block';
+    }else if(searchFld.value >0){
+        error2.style.display = 'block';
+    }else{
 
-    //     error2.style.display = 'none';
-    //     error1.style.display = 'none';
-    // };
+        // Get Load Phones Data
+        fetch('https://openapi.programming-hero.com/api/phones?')
+        .then(res => res.json())
+        .then(phones => displayPhone(phones.data)); 
+        
+        error1.style.display == 'none';
+        error2.style.display == 'none';
+
+    };
 
 
 
@@ -58,6 +64,15 @@ const displayPhone = (phones) => {
     // Get Loop in Array
     phones.forEach(phone => {
         console.log(phone);
+        
+        // if ( phone.slug === "apple_iphone_13_mini-11104") { 
+    
+        //     phones.splice(0,0); 
+        //     console.log(phones);
+        //     return phones;
+
+        // };
+
         const div = document.createElement('div');
         div.innerHTML = `
         <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
@@ -101,19 +116,54 @@ const displayData = (phone) => {
 
     // Get Details conatiner
     const DetailsContainer = document.getElementById('data');
+
+    DetailsContainer.textContent= '';
+
     DetailsContainer.innerHTML = `
     
-        <div class="card mb-3">
+        <div class="card m-3"  style="width: 24rem;">
 
-            <img class="card-img-top w-25 d-flex mx-auto my-3" src="${phone.image}" alt="Card image cap">
+            <img class="card-img-top d-flex p-3 img-fluid" src="${phone.image}" alt="">
 
             <div class="card-body">
-                <h5 class="card-title">${phone.name}</h5>
+                <h3 class="card-title">${phone.name}</h3>
                 <p class="card-text"><span class="font-weight-bold">Brand name :</span> ${phone.brand}</p>
-                <p class="card-text"><small class="text-muted">${phone.releaseDate}</small></p>
-            </div>
+                
+                <p class="card-text"><small class="text-muted">${phone.releaseDate ? phone.releaseDate: "Release Date Not Found"}</small></p>
+                
+                <hr>
+                <h4 class="text-center">Main Features-</h4>
+                <hr>
 
+                <p class="card-text"><span class="font-weight-bold">Chipset :</span> ${phone.mainFeatures.chipSet}</p>
+                <p class="card-text"><span class="font-weight-bold">Display :</span> ${phone.mainFeatures.displaySize.slice(0,12)} </br> ${phone.mainFeatures.displaySize.slice(12,80)}</p>
+                <p class="card-text"><span class="font-weight-bold">Memory :</span> </br>
+                 ${phone.mainFeatures.memory.slice(0,14)} </br> ${phone.mainFeatures.memory.slice(14,29)} </br> ${phone.mainFeatures.memory.slice(29,43)}</p>                
+                 <p class="card-text"><span class="font-weight-bold">Storage :</span> </br>
+                 ${phone.mainFeatures.storage}</p>
+                 <p class="card-text"><span class="font-weight-bold">Sensors :</span> </br>
+                 ${phone.mainFeatures.sensors.map(sensor => sensor +'</br>')}</p>
+
+                 <hr>
+                 <h4 class="text-center">Others Features-</h4>
+                 <hr>
+                
+                 <p class="card-text"><span class="font-weight-bold">Bluetooth :</span>
+                 ${phone.others ? phone.others.Bluetooth: "Date Not Found"}</p>
+                 <p class="card-text"><span class="font-weight-bold">GPS :</span>
+                 ${phone.others ? phone.others.GPS: "Date Not Found"}</p>
+                 <p class="card-text"><span class="font-weight-bold">NFC :</span>
+                 ${phone.others ? phone.others.NFC: "Date Not Found"}</p>
+                 <p class="card-text"><span class="font-weight-bold">Radio :</span>
+                 ${phone.others ? phone.others.Radio: "Date Not Found"}</p>
+                 <p class="card-text"><span class="font-weight-bold">USB :</span>
+                 ${phone.others ? phone.others.USB: "Date Not Found"}</p>
+                 <p class="card-text"><span class="font-weight-bold">WLAN :</span>
+                 ${phone.others ? phone.others.WLAN: "Date Not Found"}</p>
+
+            </div>
         </div>
-    
+
     `;
+
 };
