@@ -4,7 +4,6 @@
 // https://openapi.programming-hero.com/api/phones?
 
 // Get Phone Api
-
 const searchPhone = () => {
 
     // Get Input Field
@@ -22,22 +21,28 @@ const searchPhone = () => {
 
     // Get Handle Error
     if(searchFld.value === ''){
+        error1.style.display = 'none';
+        error2.style.display = 'block';
+    }else if(searchFld.value <= 0){
+        error1.style.display = 'none';
+        error2.style.display = 'block';
+    }else if(searchFld.value >= 0){
+        error1.style.display = 'none';
+        error2.style.display = 'block';
+    }else if(phones.data === undefined){
         error1.style.display = 'block';
         error2.style.display = 'none';
-    }else if(searchFld.value <=0){
-        error2.style.display = 'block';
-    }else if(searchFld.value >0){
-        error2.style.display = 'block';
+    }else if(phones.data === null){
+        error1.style.display = 'block';
+        error2.style.display = 'none';
     }else{
-
         // Get Load Phones Data
         fetch('https://openapi.programming-hero.com/api/phones?')
         .then(res => res.json())
-        .then(phones => displayPhone(phones.data)); 
-        
-        error1.style.display == 'none';
-        error2.style.display == 'none';
+        .then(phones => displayPhone(phones.data))
 
+        error1.style.display = 'none';
+        error2.style.display = 'none';
     };
 
 
@@ -58,13 +63,26 @@ const displayPhone = (phones) => {
     const phoneContainer = document.getElementById('phones');
     console.log(phones);
 
+
+
     // Get Clear old Search History
     phoneContainer.textContent = '';
 
+    
+    
+    // if(phones > 20){
+    //     phones.slice(0,20);
+    //     return phones;
+    // };
+
+
+    const phone20 = phones.slice(0,20);
+    const phoneAll = phones.slice(20,200);
+
     // Get Loop in Array
-    phones.forEach(phone => {
+    phone20.forEach(phone => {
         console.log(phone);
-        
+
         // if ( phone.slug === "apple_iphone_13_mini-11104") { 
     
         //     phones.splice(0,0); 
@@ -73,26 +91,64 @@ const displayPhone = (phones) => {
 
         // };
 
-        const div = document.createElement('div');
-        div.innerHTML = `
-        <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
-
-            <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
-
-            <div class="card-body">
-                <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
-                <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
-                <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
+            const div = document.createElement('div');
+            div.innerHTML = `
+            <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
+    
+                <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
+    
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
+                    <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
+                    <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
+                </div>
+    
             </div>
+    
+            `;
 
-        </div>
-
-        `;
-
-        // <span class="card-detail d-block"> <span class="font-weight-bold">Slug :</span> </br> ${phone.slug}</span> </br>
+                    document.getElementById('showMore').style.display = 'block';
 
         // Get Append Parent Node
         phoneContainer.appendChild(div);
+    });
+
+    document.getElementById('showMore').addEventListener('click', function(){
+
+    // Get Loop in Array
+    phoneAll.forEach(phone => {
+        console.log(phone);
+
+        // if ( phone.slug === "apple_iphone_13_mini-11104") { 
+    
+        //     phones.splice(0,0); 
+        //     console.log(phones);
+        //     return phones;
+
+        // };
+
+            const div = document.createElement('div');
+            div.innerHTML = `
+            <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
+    
+                <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
+    
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
+                    <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
+                    <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
+                </div>
+    
+            </div>
+    
+            `;
+
+
+
+        // Get Append Parent Node
+        phoneContainer.appendChild(div);
+
+    });
     });
 };
 
