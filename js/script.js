@@ -63,17 +63,8 @@ const displayPhone = (phones) => {
     const phoneContainer = document.getElementById('phones');
     console.log(phones);
 
-
-
     // Get Clear old Search History
     phoneContainer.textContent = '';
-
-    
-    
-    // if(phones > 20){
-    //     phones.slice(0,20);
-    //     return phones;
-    // };
 
 
     const phone20 = phones.slice(0,20);
@@ -93,14 +84,14 @@ const displayPhone = (phones) => {
 
             const div = document.createElement('div');
             div.innerHTML = `
-            <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
+            <div onclick="loadData('${phone.slug}')" class="card m-3 shadow" style="width: 18rem;">
     
                 <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
     
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
                     <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
-                    <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
+                    <a href="#" class="btn btn-outline-primary my-3">Explore</a>
                 </div>
     
             </div>
@@ -129,14 +120,14 @@ const displayPhone = (phones) => {
 
             const div = document.createElement('div');
             div.innerHTML = `
-            <div onclick="loadData('${phone.slug}')" class="card m-3" style="width: 18rem;">
+            <div onclick="loadData('${phone.slug}')" class="card m-3 shadow" style="width: 18rem;">
     
                 <img class="card-img-top w-75 d-flex my-2 mx-auto" src="${phone.image}" alt="Card image cap">
     
                 <div class="card-body">
                     <h5 class="card-title font-weight-bold">Name : ${phone.phone_name}</h5>
                     <span class="card-detail d-block font-weight-bold">Brand Name : ${phone.brand}</span>
-                    <a href="#" class="btn btn-outline-primary my-3">Explore More</a>
+                    <a href="#" class="btn btn-outline-primary my-3">Explore</a>
                 </div>
     
             </div>
@@ -177,7 +168,7 @@ const displayData = (phone) => {
 
     DetailsContainer.innerHTML = `
     
-        <div class="card m-3"  style="width: 24rem;">
+        <div class="card m-3 shadow"  style="width: 24rem;">
 
             <img class="card-img-top d-flex p-3 img-fluid" src="${phone.image}" alt="">
 
@@ -223,3 +214,6 @@ const displayData = (phone) => {
     `;
 
 };
+
+
+
