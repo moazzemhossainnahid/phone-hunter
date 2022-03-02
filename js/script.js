@@ -27,16 +27,12 @@ const searchPhone = () => {
     // Get Clear Input
     searchFld.value = '';
 
-
-
     // Get Load Phones Data
     fetch(`https://openapi.programming-hero.com/api/phones?search=${searchTxt}`)
         .then(res => res.json())
         .then(phones => displayPhone(phones.data))
 
 };
-
-
 
 
 const displayPhone = (phones) => {
@@ -57,13 +53,19 @@ const displayPhone = (phones) => {
         error.style.display = 'none';
     };
 
+    
+    if(phones.length < 20){
+        document.getElementById('showMore').style.display = 'none';
+    }else{
+        document.getElementById('showMore').style.display = 'block';
+    };
+
 
     // if(phones.length === 0){
     //     swal("Oppss, No Data Found...!", "Please Enter a Valid Phone Name.", "error");
     // }else{
     //     swal = 'none';
     // };
-
 
 
     // Get Slice Result
@@ -82,16 +84,6 @@ const displayPhone = (phones) => {
 
         // };
 
-
-
-
-                
-
-
-
-
-
-
             const div = document.createElement('div');
             div.innerHTML = `
             <div onclick="loadData('${phone.slug}')" class="card m-3 shadow" style="width: 18rem;">
@@ -108,18 +100,11 @@ const displayPhone = (phones) => {
     
             `;
 
-            
-        clearInterval(function(){
-            const preLoaderCon = document.getElementById('preLoaderCon');
-            preLoaderCon.style.display = 'none';
-        },2000);
-
-                    document.getElementById('showMore').style.display = 'block';
-
         // Get Append Parent Node
         phoneContainer.appendChild(div);
 
     });
+
 
     document.getElementById('showMore').addEventListener('click', function(){
 
